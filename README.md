@@ -1,30 +1,24 @@
 # staleBranchReportScript
 
-This script generates a report of stale branches for a given repository or list of repositories.
+This script generates a report of stale branches for all the projects in Bitbucket (Except user projects).
 A branch is considered stale when it has not been merged into master and its last commit is older
-than 30 days.
+than 90 days.
 
 ## Usage
 
 ```
-staleBranchReport -u <repository url> || -l <text file of repository urls> [OPTION]
+staleBranchReport [OPTIONS]
 
 Options:
-	-w	: Working directory used to perform the git clone and to store the generated report. If not supplied, defaults to whatever directory the terminal is currently in.
+	-e	: E-mail address or addresses to send the report to.
+	-d	: Sets the age in days for when a branch is considered stale. [default: 90]
 	
 ```
 
 ## Examples
 
 ```
-staleBranchReport -u ssh://git@com.mycompany:7999/et/someTool.git -w /e/reports
+staleBranchReport -e "johnSmith@mail.mil janeSmith@mail.mil" -d 30
 ```
 
-This will generate a report at /e/reports/staleBranchReport/repo-report-2018-09-28T11-05:00.txt
-for the someTool repository in the Enterprise Tools project.
-
-```
-staleBranchReport -l /e/reports/repo-list.txt -w /e/reports
-```
-This will generate a report at /e/reports/staleBranchReport/repo-report-2018-09-28T11-05:00.txt
-containing the reports for all the repositories in the repo-list.txt file.
+This will generate a report and e-mail it to myEmail@mail.mil.
